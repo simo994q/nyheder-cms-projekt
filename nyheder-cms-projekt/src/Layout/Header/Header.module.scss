@@ -1,0 +1,46 @@
+.headerContainer {
+    width: 100%;
+
+    .headerSecondContainer {
+        max-width: 1100px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h1 {
+            color: #C52525;
+            font-size: 50px;
+            letter-spacing: 2px;
+        }
+
+        ul {
+            display: flex;
+            list-style: none;
+
+            li {
+                font-size: 22px;
+
+                a {
+                    padding: 0px 10px;
+                    text-decoration: none;
+                    letter-spacing: 2px;
+                }
+            }
+
+            li:not(:last-child) a {
+                border-right: 2px solid black;
+            }
+        }
+
+        div {
+            display: flex;
+            gap: 16px;
+
+            img {
+                height: 30px
+            }
+        }
+
+    }
+}
