@@ -14,14 +14,18 @@ export const AllArticles = () => {
     if (isLoading) console.log('Loading...');
 
     if (error) console.log(error.message);
+    
+    let classNumber = 1
 
     return (
         <>
             <NewsContainer>
                 {data?.articles.map((item, index) => {
-                    console.log(item);
+                    if (classNumber === 8) {
+                        classNumber = 1
+                    }
                     return (
-                        <Article data={item} />
+                        <Article data={item} key={index} class={`article${classNumber}`}/>
                     )
                 })}
             </NewsContainer>
