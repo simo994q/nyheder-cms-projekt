@@ -1,0 +1,10 @@
+.footerContainer {
+    width: 100%;
+
+    .footerSecondContainer {
+        display: flex;
+        justify-content: space-between;
+        max-width: 900px;
+        margin: auto;
+    }
+}
