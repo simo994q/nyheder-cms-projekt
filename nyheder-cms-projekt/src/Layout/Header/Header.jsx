@@ -1,5 +1,6 @@
 import style from './Header.module.scss'
 import { NavLink } from 'react-router-dom'
+import { slide as Menu } from 'react-burger-menu'
 
 export const Header = () => {
 

@@ -8,3 +8,7 @@
   color: #000000;
   font-family: 'Roboto Flex';
 }
+
+img {
+  display: block;
+}

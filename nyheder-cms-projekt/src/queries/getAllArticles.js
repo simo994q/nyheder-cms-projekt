@@ -1,5 +1,5 @@
 export const getAllArticles = `query getAllArticles {
-    articles {
+    articles(orderBy: date_DESC) {
       author
       catcher
       category
