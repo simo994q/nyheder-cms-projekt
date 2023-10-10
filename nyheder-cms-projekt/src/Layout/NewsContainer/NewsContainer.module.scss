@@ -6,7 +6,7 @@
     grid-template-rows: repeat(8, 0.4fr);
     grid-column-gap: 20px;
     grid-row-gap: 20px;
-    padding: 20px ;
+    padding: 20px;
 
     div {
         overflow: hidden;
@@ -22,5 +22,13 @@
         height: 100%;
         object-fit: cover;
         transition: 400ms;
+    }
+}
+
+@media (max-width: 768px) {
+    .articlesContainer {
+        grid-template-columns: 1fr;
+        grid-column-gap: 0px;
+        grid-template-rows: repeat(7, 0.4fr);
     }
 }
