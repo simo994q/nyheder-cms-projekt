@@ -2,10 +2,31 @@
     width: 100%;
 
     .footerSecondContainer {
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 20px;
         max-width: 900px;
         margin: auto;
         padding: 20px;
+
+        section p:first-child {
+            font-weight: bold;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .footerContainer {
+        .footerSecondContainer {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+
+@media (max-width: 450px) {
+    .footerContainer {
+        .footerSecondContainer {
+            grid-template-columns: 1fr;
+        }
     }
 }

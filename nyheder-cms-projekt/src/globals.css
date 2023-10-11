@@ -9,6 +9,10 @@
   font-family: 'Roboto Flex';
 }
 
+body {
+  /* overflow-x: hidden; */
+}
+
 img {
   display: block;
 }

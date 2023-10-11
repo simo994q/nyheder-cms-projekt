@@ -1,6 +1,7 @@
 import style from './Header.module.scss'
 import { NavLink } from 'react-router-dom'
 import { slide as Menu } from 'react-burger-menu'
+import { useState } from 'react'
 
 export const Header = () => {
 
@@ -14,12 +15,21 @@ export const Header = () => {
         { title: 'Samfund', link: '/samfund' }
     ]
 
+    const [navigation, setNavigation] = useState('closed')
+
     return (
         <>
             <div className={style.headerContainer}>
                 <div className={style.headerSecondContainer}>
                     <h1>INGN</h1>
-                    <ul>
+                    <ul className={style.deskList}>
+                        {links.map((item, index) => {
+                            return (
+                                <li key={index}><NavLink to={`${item.link}`}>{item.title}</NavLink></li>
+                            )
+                        })}
+                    </ul>
+                    <ul className={style.mobileList}>
                         {links.map((item, index) => {
                             return (
                                 <li key={index}><NavLink to={`${item.link}`}>{item.title}</NavLink></li>
@@ -28,7 +38,7 @@ export const Header = () => {
                     </ul>
                     <div>
                         <img src="/user.svg" alt="" />
-                        <img src="/menu.svg" alt="" />
+                        <img src="/menu.svg" alt="" onClick={() => openMenu()} />
                     </div>
                 </div>
             </div>
