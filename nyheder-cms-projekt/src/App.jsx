@@ -12,6 +12,7 @@ import { Sports } from './Components/Categories/Sports'
 import { Politics } from './Components/Categories/Politics'
 import { Society } from './Components/Categories/Society'
 import { Detailed } from './Components/Detailed/Detailed'
+import { Login } from './Components/Login/Login'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
               <Route path='/politik' element={<Politics />} />
               <Route path='/samfund' element={<Society />} />
               <Route path='/:category/:id' element={<Detailed />} />
+              <Route path='/login' element={<Login />} />
             </Route>
           </Routes>
         </BrowserRouter>

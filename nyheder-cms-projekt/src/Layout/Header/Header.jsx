@@ -46,7 +46,7 @@ export const Header = () => {
                         })}
                     </ul>
                     <div>
-                        <img src="/user.svg" alt="" />
+                        <NavLink to='/login'><img src="/user.svg" alt="" /></NavLink>
                         <img className={style.menu} src="/menu.svg" alt="" onClick={() => openMenu()} />
                     </div>
                 </div>

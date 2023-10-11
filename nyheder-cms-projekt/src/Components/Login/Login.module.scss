@@ -1,0 +1,41 @@
+.loginContainer {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    
+    .loginForm {
+        background-color: #fff;
+        padding: 20px;
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            
+            label {
+                margin-bottom: 10px;
+            }
+
+            .inputField {
+                border: 3px solid #C52525;
+                font-size: 22px;
+                padding: 4px;
+                outline: none;
+                margin-bottom: 20px;
+            }
+
+            .inputSubmit {
+                width: 100px;
+                border: 3px solid #C52525;
+                background-color: white;
+                font-size: 16px;
+                padding: 8px 0;
+                cursor: pointer;
+            }
+        }
+    }
+}
