@@ -47,6 +47,10 @@
                 height: 30px
             }
         }
+
+        .menu {
+            display: none;
+        }
     }
 }
 
@@ -70,6 +74,9 @@
             }
             .mobileList {
                 display: flex;
+            }
+            .menu {
+                display: block;
             }
         }
     }

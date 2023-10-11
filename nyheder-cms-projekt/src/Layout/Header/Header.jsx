@@ -47,7 +47,7 @@ export const Header = () => {
                     </ul>
                     <div>
                         <img src="/user.svg" alt="" />
-                        <img src="/menu.svg" alt="" onClick={() => openMenu()} />
+                        <img className={style.menu} src="/menu.svg" alt="" onClick={() => openMenu()} />
                     </div>
                 </div>
             </div>
