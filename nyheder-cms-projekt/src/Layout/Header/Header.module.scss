@@ -39,38 +39,6 @@
             }
         }
 
-        .mobileList {
-            display: none;
-
-            // display: flex;
-            flex-direction: column;
-            list-style: none;
-            position: absolute;
-            right: 0;
-            bottom: 60px;
-            translate: 100% 100%;
-            gap: 10px;
-            height: 100vh;
-            align-items: center;
-            justify-content: center;
-
-            li {
-                font-size: 22px;
-                text-align: center;
-
-                a {
-                    padding: 0px 10px;
-                    text-decoration: none;
-                    letter-spacing: 2px;
-                    border-right: none;
-                }
-            }
-
-            li:first-child a {
-                border-left: none;
-            }
-        }
-
         div {
             display: flex;
             gap: 16px;

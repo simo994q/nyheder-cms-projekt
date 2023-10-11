@@ -2,6 +2,7 @@ import style from './Header.module.scss'
 import { NavLink } from 'react-router-dom'
 import { slide as Menu } from 'react-burger-menu'
 import { useState } from 'react'
+import './Navigation.css'
 
 export const Header = () => {
 
@@ -17,6 +18,14 @@ export const Header = () => {
 
     const [navigation, setNavigation] = useState('closed')
 
+    const openMenu = () => {
+        if (navigation == 'closed') {
+            setNavigation('open')
+        } else if (navigation == 'open') {
+            setNavigation('closed')
+        }
+    }
+
     return (
         <>
             <div className={style.headerContainer}>
@@ -29,10 +38,10 @@ export const Header = () => {
                             )
                         })}
                     </ul>
-                    <ul className={style.mobileList}>
+                    <ul className={`mobileList ${navigation}`}>
                         {links.map((item, index) => {
                             return (
-                                <li key={index}><NavLink to={`${item.link}`}>{item.title}</NavLink></li>
+                                <li key={index}><NavLink to={`${item.link}`} onClick={() => openMenu()}>{item.title}</NavLink></li>
                             )
                         })}
                     </ul>

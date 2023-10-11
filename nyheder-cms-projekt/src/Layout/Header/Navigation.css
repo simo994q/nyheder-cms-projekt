@@ -1,0 +1,46 @@
+.mobileList {
+    display: none;
+    flex-direction: column;
+    list-style: none;
+    position: absolute;
+    right: 0%;
+    bottom: 0px;
+    translate: 100% 100%;
+    gap: 10px;
+    height: calc(100vh - 60px);
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    z-index: 99;
+    width: 200px;
+    transition: 400ms;
+}
+
+.closed {
+    translate: 100% 100%;
+}
+.open {
+    translate: 0% 100%;
+}
+
+.mobileList li {
+    font-size: 22px;
+    text-align: center;
+}
+
+.mobileList li a {
+    padding: 0px 10px;
+    text-decoration: none;
+    letter-spacing: 2px;
+    border-right: none;
+}
+
+.mobileList li:first-child a {
+    border-left: none;
+}
+
+@media (max-width: 836px) {
+    .mobileList {
+        display: flex;
+    }
+}
