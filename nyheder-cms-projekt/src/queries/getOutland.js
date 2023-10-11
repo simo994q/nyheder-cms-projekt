@@ -1,4 +1,4 @@
-const getOutland = `query MyQuery {
+export const getOutland = `query MyQuery {
     articles(orderBy: date_DESC, where: {category: Udland}) {
       author
       catcher

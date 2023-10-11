@@ -1,4 +1,4 @@
-const getSports = `query MyQuery {
+export const getSports = `query MyQuery {
     articles(orderBy: date_DESC, where: {category: Sport}) {
       author
       catcher

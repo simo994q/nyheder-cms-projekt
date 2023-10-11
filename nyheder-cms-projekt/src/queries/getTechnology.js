@@ -1,4 +1,4 @@
-const getTechnology = `query MyQuery {
+export const getTechnology = `query MyQuery {
     articles(orderBy: date_DESC, where: {category: Teknologi}) {
       author
       catcher
