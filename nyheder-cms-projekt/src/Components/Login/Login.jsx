@@ -8,7 +8,7 @@ export const Login = () => {
 
     const { user, setUser } = useContext(User)
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit} = useForm();
     const onSubmit = data => {
         setUser({ username: data.Brugernavn, password: data.Password })
     };
