@@ -4,12 +4,13 @@ import { request } from 'graphql-request'
 import { NewsContainer } from "../../Layout/NewsContainer/NewsContainer"
 import { Article1 } from "../Article/Article1"
 import { Article2 } from "../Article/Article2"
+import { getCategory } from "../../queries/getCategory"
 
 export const Politics = () => {
 
     const { data, isLoading, error } = useQuery({
         queryKey: ['allArticles'],
-        queryFn: async () => request(`https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clnij52rt05rg01ue9cvq8ycn/master`, getPolitics)
+        queryFn: async () => request(`https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clnij52rt05rg01ue9cvq8ycn/master`, getCategory, {cat: 'Politik'})
     })
 
     if (isLoading) console.log('Loading...');

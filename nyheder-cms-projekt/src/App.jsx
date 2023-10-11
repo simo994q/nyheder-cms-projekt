@@ -13,6 +13,7 @@ import { Politics } from './Components/Categories/Politics'
 import { Society } from './Components/Categories/Society'
 import { Detailed } from './Components/Detailed/Detailed'
 import { Login } from './Components/Login/Login'
+import { UserContextProvider } from './context/Context'
 
 function App() {
 
@@ -20,23 +21,25 @@ function App() {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<MainLayout />} >
-              <Route index element={<AllArticles />} />
-              <Route path='/indland' element={<Inland />} />
-              <Route path='/udland' element={<Outland />} />
-              <Route path='/teknologi' element={<Technology />} />
-              <Route path='/sport' element={<Sports />} />
-              <Route path='/politik' element={<Politics />} />
-              <Route path='/samfund' element={<Society />} />
-              <Route path='/:category/:id' element={<Detailed />} />
-              <Route path='/login' element={<Login />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </QueryClientProvider>
+      <UserContextProvider>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<MainLayout />} >
+                <Route index element={<AllArticles />} />
+                <Route path='/indland' element={<Inland />} />
+                <Route path='/udland' element={<Outland />} />
+                <Route path='/teknologi' element={<Technology />} />
+                <Route path='/sport' element={<Sports />} />
+                <Route path='/politik' element={<Politics />} />
+                <Route path='/samfund' element={<Society />} />
+                <Route path='/:category/:id' element={<Detailed />} />
+                <Route path='/login' element={<Login />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </UserContextProvider>
     </>
   )
 }

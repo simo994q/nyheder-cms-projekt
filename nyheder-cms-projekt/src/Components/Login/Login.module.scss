@@ -12,6 +12,15 @@
             margin-bottom: 20px;
         }
 
+        .inputSubmit {
+            width: 100px;
+            border: 3px solid #C52525;
+            background-color: white;
+            font-size: 16px;
+            padding: 8px 0;
+            cursor: pointer;
+        }
+
         form {
             display: flex;
             flex-direction: column;
