@@ -27,8 +27,7 @@
 
 @media (max-width: 768px) {
     .articlesContainer {
-        grid-template-columns: 1fr;
-        grid-column-gap: 0px;
-        grid-template-rows: repeat(7, 0.4fr);
+        display: flex;
+        flex-direction: column;
     }
 }
