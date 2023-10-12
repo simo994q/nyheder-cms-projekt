@@ -17,7 +17,7 @@ export const Article2 = (props) => {
                         <div className='linkAndEdit'>
                             <NavLink className='articleLink' to={`/${props.data.category.toLowerCase()}/${props.data.id}`}>Læs mere</NavLink>
                             <div>
-                                <img src="/edit.svg" alt="" />
+                                <NavLink to={`/edit/${props.data.id}`}><img src="/edit.svg" alt="" /></NavLink>
                                 <img src="/delete.svg" alt="" />
                             </div>
                         </div>

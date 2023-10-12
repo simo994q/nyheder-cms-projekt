@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { request } from 'graphql-request'
+import { getOneArticle } from '../../queries/getOneArticle'
 
 import style from './Detailed.module.scss'
 
@@ -8,28 +9,9 @@ export const Detailed = () => {
 
     const { id } = useParams()
 
-    const oneArticle = `query MyQuery {
-        articles(where: {id: "${id}"}) {
-          author
-          catcher
-          category
-          date
-          id
-          title
-          stage
-          content {
-            html
-          }
-          image {
-            url
-          }
-        }
-      }
-      `
-
     const { data, isLoading, error } = useQuery({
         queryKey: ['allArticles'],
-        queryFn: async () => request(`https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clnij52rt05rg01ue9cvq8ycn/master`, oneArticle)
+        queryFn: async () => request(`https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clnij52rt05rg01ue9cvq8ycn/master`, getOneArticle, { artId: `${id}` })
     })
 
     if (isLoading) console.log('Loading...');

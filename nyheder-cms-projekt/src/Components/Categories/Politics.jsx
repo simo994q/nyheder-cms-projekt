@@ -16,8 +16,6 @@ export const Politics = () => {
 
     if (error) console.log(error.message);
 
-    console.log(data);
-
     let classNumber = 1
 
     return (

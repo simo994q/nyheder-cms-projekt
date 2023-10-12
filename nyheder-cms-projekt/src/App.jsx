@@ -14,6 +14,7 @@ import { Society } from './Components/Categories/Society'
 import { Detailed } from './Components/Detailed/Detailed'
 import { Login } from './Components/Login/Login'
 import { UserContextProvider } from './context/Context'
+import { Edit } from './Components/Edit/Edit'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
                 <Route path='/samfund' element={<Society />} />
                 <Route path='/:category/:id' element={<Detailed />} />
                 <Route path='/login' element={<Login />} />
+                <Route path='/edit/:id' element={<Edit />} />
               </Route>
             </Routes>
           </BrowserRouter>
