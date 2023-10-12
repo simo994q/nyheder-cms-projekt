@@ -1,4 +1,4 @@
-import { getSports } from "../../queries/getSports"
+import { getCategory } from "../../queries/getCategory"
 import { useQuery } from "@tanstack/react-query"
 import { request } from 'graphql-request'
 import { NewsContainer } from "../../Layout/NewsContainer/NewsContainer"
@@ -9,7 +9,7 @@ export const Sports = () => {
 
     const { data, isLoading, error } = useQuery({
         queryKey: ['allArticles'],
-        queryFn: async () => request(`https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clnij52rt05rg01ue9cvq8ycn/master`, getSports)
+        queryFn: async () => request(`https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clnij52rt05rg01ue9cvq8ycn/master`, getCategory, {cat: "sport"})
     })
 
     if (isLoading) console.log('Loading...');

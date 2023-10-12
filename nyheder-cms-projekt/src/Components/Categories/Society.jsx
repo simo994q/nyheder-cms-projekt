@@ -1,4 +1,4 @@
-import { getSociety } from "../../queries/getSociety"
+import { getCategory } from "../../queries/getCategory"
 import { useQuery } from "@tanstack/react-query"
 import { request } from 'graphql-request'
 import { NewsContainer } from "../../Layout/NewsContainer/NewsContainer"
@@ -9,7 +9,7 @@ export const Society = () => {
 
     const { data, isLoading, error } = useQuery({
         queryKey: ['allArticles'],
-        queryFn: async () => request(`https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clnij52rt05rg01ue9cvq8ycn/master`, getSociety)
+        queryFn: async () => request(`https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clnij52rt05rg01ue9cvq8ycn/master`, getCategory, {cat: "samfund"})
     })
 
     if (isLoading) console.log('Loading...');

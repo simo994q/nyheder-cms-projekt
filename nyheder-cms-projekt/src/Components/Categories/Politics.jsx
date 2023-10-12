@@ -1,21 +1,22 @@
-import { getPolitics } from "../../queries/getPolitics"
+import { getCategory } from "../../queries/getCategory"
 import { useQuery } from "@tanstack/react-query"
 import { request } from 'graphql-request'
 import { NewsContainer } from "../../Layout/NewsContainer/NewsContainer"
 import { Article1 } from "../Article/Article1"
 import { Article2 } from "../Article/Article2"
-import { getCategory } from "../../queries/getCategory"
 
 export const Politics = () => {
 
     const { data, isLoading, error } = useQuery({
         queryKey: ['allArticles'],
-        queryFn: async () => request(`https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clnij52rt05rg01ue9cvq8ycn/master`, getCategory, {cat: 'Politik'})
+        queryFn: async () => request(`https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clnij52rt05rg01ue9cvq8ycn/master`, getCategory, {cat: "politik"})
     })
 
     if (isLoading) console.log('Loading...');
 
     if (error) console.log(error.message);
+
+    console.log(data);
 
     let classNumber = 1
 
