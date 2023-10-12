@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { request } from 'graphql-request'
 import { getOneArticle } from '../../queries/getOneArticle'
-
+import dompurify from 'dompurify';
 import style from './Detailed.module.scss'
 
 export const Detailed = () => {
@@ -18,10 +18,6 @@ export const Detailed = () => {
 
     if (error) console.log(error.message);
 
-    function createMarkup() {
-        return { __html: data?.articles[0].content.html };
-    }
-
     return (
         <>
             <div className={style.detailedContainer}>
@@ -29,7 +25,7 @@ export const Detailed = () => {
                     <img className={style.detailedImg} src={data?.articles[0].image.url} alt="" />
                     <h2 className={style.detailedHeader}>{data?.articles[0].title}</h2>
                     <p className={style.detailedDate}>D. {data?.articles[0].date.slice(5, 7)}/{data?.articles[0].date.slice(8, 10)}-{data?.articles[0].date.slice(0, 4)} - af {data?.articles[0].author}</p>
-                    <div className={style.detailedText} dangerouslySetInnerHTML={createMarkup()} />
+                    <div className={style.detailedText} dangerouslySetInnerHTML={{ __html: dompurify.sanitize(data?.articles[0].content.html) }} />
                 </div>
             </div>
         </>
