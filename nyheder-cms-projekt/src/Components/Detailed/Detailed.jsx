@@ -24,7 +24,7 @@ export const Detailed = () => {
                 <div className={style.detailedContent}>
                     <img className={style.detailedImg} src={data?.articles[0].image.url} alt="" />
                     <h2 className={style.detailedHeader}>{data?.articles[0].title}</h2>
-                    <p className={style.detailedDate}>D. {data?.articles[0].date.slice(5, 7)}/{data?.articles[0].date.slice(8, 10)}-{data?.articles[0].date.slice(0, 4)} - af {data?.articles[0].author}</p>
+                    <p className={style.detailedDate}>D. {data?.articles[0].date.slice(8, 10)}/{data?.articles[0].date.slice(5, 7)}-{data?.articles[0].date.slice(0, 4)} - af {data?.articles[0].author}</p>
                     <div className={style.detailedText} dangerouslySetInnerHTML={{ __html: dompurify.sanitize(data?.articles[0].content.html) }} />
                 </div>
             </div>

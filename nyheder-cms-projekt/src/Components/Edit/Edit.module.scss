@@ -14,6 +14,29 @@
         form {
             display: flex;
             flex-direction: column;
+
+            .inputField {
+                margin-bottom: 16px;
+                padding: 6px;
+            }
+            
+            .inputSubmit {
+                width: fit-content;
+                border: 3px solid #C52525;
+                background-color: white;
+                font-size: 16px;
+                padding: 6px 12px;
+                cursor: pointer;
+                margin-top: 16px;
+            }
+
+            .inputSubmit:first-of-type {
+                margin-bottom: 16px;
+            }
+
+            .fileField {
+                margin-bottom: 16px;
+            }
         }
     }
 }

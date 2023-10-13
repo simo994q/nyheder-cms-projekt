@@ -4,7 +4,9 @@ import { getOneArticle } from '../../queries/getOneArticle'
 import { useQuery } from "@tanstack/react-query"
 import { request } from 'graphql-request'
 import { useForm } from "react-hook-form";
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Editor } from '@tinymce/tinymce-react';
+import { useRef } from 'react'
 
 export const Edit = () => {
 
@@ -19,55 +21,70 @@ export const Edit = () => {
 
     if (error) console.log(error.message);
 
-    console.log(data);
-
-    const { register, handleSubmit } = useForm();
-    const onSubmit = data => {
-        setUser({ username: data.Brugernavn, password: data.Password })
+    const editorRef = useRef(null);
+    const save = () => {
+        if (editorRef.current) {
+            console.log(editorRef.current.getContent())
+            setNewText(editorRef.current.getContent())
+            setSaved(true)
+        }
     };
 
-    const [title, setTitle] = useState(data?.articles[0].title)
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(newTitle);
+    }
+
+    const [newTitle, setNewTitle] = useState()
+    const [newCatcher, setNewCatcher] = useState()
+    const [newDate, setNewDate] = useState()
+    const [newAuthor, setNewAuthor] = useState()
+    const [newText, setNewText] = useState()
+    const [saved, setSaved] = useState(false)
+    const [newImage, setNewImage] = useState()
+    const [newCategory, setNewCategory] = useState()
 
     return (
         <>
             <div className={style.editContainer}>
                 <div className={style.editContent}>
                     <h2>Rediger</h2>
-                    {/* <form onSubmit={handleSubmit(onSubmit)}>
-                        <label htmlFor="Title">Titel</label>
-                        <input value={data?.articles[0].title} className={style.inputField} {...register("Title", { required: true })} />
-                        <label htmlFor="">Beskrivelse</label>
-                        <input className={style.inputField} {...register("Title", { required: true })} />
-                        <label htmlFor="">Dato</label>
-                        <input className={style.inputField} {...register("Date", { required: true })} />
-                        <label htmlFor="">Forfatter</label>
-                        <input className={style.inputField} {...register("Author", { required: true })} />
+                    <form onSubmit={(e) => handleSubmit(e)}>
+                        <label htmlFor="Title">Titel: "{data?.articles[0].title}"</label>
+                        <input placeholder='Ny titel' className={style.inputField} onChange={(e) => setNewTitle(e.target.value)} />
+                        <label htmlFor="">Beskrivelse: "{data?.articles[0].catcher}"</label>
+                        <input placeholder='Ny beskrivelse' className={style.inputField} onChange={(e) => setNewCatcher(e.target.value)} />
+                        <label htmlFor="">Dato: "{data?.articles[0].date.slice(8, 10)}/{data?.articles[0].date.slice(5, 7)}-{data?.articles[0].date.slice(0, 4)}" (dd/mm/yyyy)</label>
+                        <input placeholder='Ny dato' className={style.inputField} onChange={(e) => setNewDate(e.target.value)} />
+                        <label htmlFor="">Forfatter: "{data?.articles[0].author}"</label>
+                        <input placeholder='Ny forfatter' className={style.inputField} onChange={(e) => setNewAuthor(e.target.value)} />
                         <label htmlFor="">Tekst</label>
-                        <input className={style.inputField} {...register("Text", { required: true })} />
+                        <Editor
+                            onInit={(evt, editor) => editorRef.current = editor}
+                            initialValue={data?.articles[0].content.html}
+                            className={style.inputField}
+                            init={{
+                                height: 400,
+                                menubar: false,
+                                plugins: [
+                                    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                                    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                                    'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                                ],
+                                toolbar: 'undo redo | blocks | ' +
+                                    'bold italic forecolor | alignleft aligncenter ' +
+                                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                                    'removeformat | help',
+                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                            }}
+                        />
+                        <button onChange={() => save()} className={style.inputSubmit}>Gem</button>
                         <label htmlFor="">Billede</label>
-                        <input className={style.inputField} {...register("Image", { required: true })} />
-                        <label htmlFor="">Kategori</label>
-                        <input className={style.inputField} {...register("Category", { required: true })} />
-                        <input type="submit" value="Opdater" />
-                    </form> */}
-                    <form>
-                        <label htmlFor="Title">Titel</label>
-                        <input type="text" value={title}/>
-                        <label htmlFor="">Beskrivelse</label>
-                        <input className={style.inputField} {...register("Title", { required: true })} />
-                        <label htmlFor="">Dato</label>
-                        <input className={style.inputField} {...register("Date", { required: true })} />
-                        <label htmlFor="">Forfatter</label>
-                        <input className={style.inputField} {...register("Author", { required: true })} />
-                        <label htmlFor="">Tekst</label>
-                        <input className={style.inputField} {...register("Text", { required: true })} />
-                        <label htmlFor="">Billede</label>
-                        <input className={style.inputField} {...register("Image", { required: true })} />
-                        <label htmlFor="">Kategori</label>
-                        <input className={style.inputField} {...register("Category", { required: true })} />
-                        <input type="submit" value="Opdater" />
+                        <input className={style.fileField} type='file'/>
+                        <label htmlFor="">Kategori: "{data?.articles[0].category}"</label>
+                        <input placeholder='Ny kategori' className={style.inputField} onChange={(e) => setNewCategory(e.target.value)} />
+                        <input type="submit" value="Opdater artikel" className={style.inputSubmit} />
                     </form>
-
                 </div>
             </div>
         </>
