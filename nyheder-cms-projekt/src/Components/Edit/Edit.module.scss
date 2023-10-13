@@ -20,18 +20,25 @@
                 padding: 6px;
             }
             
-            .inputSubmit {
+            .inputSubmit2 {
                 width: fit-content;
                 border: 3px solid #C52525;
                 background-color: white;
                 font-size: 16px;
                 padding: 6px 12px;
                 cursor: pointer;
-                margin-top: 16px;
             }
 
-            .inputSubmit:first-of-type {
+            .inputSubmit1 {
                 margin-bottom: 16px;
+                background-color: red;
+                border: 3px solid #C52525;
+                background-color: white;
+                font-size: 16px;
+                padding: 6px 12px;
+                cursor: pointer;
+                margin-top: 16px;
+                width: fit-content;
             }
 
             .fileField {

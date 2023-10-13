@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from 'react'
 import { Editor } from '@tinymce/tinymce-react';
 import { useRef } from 'react'
+import { useMutation } from '@tanstack/react-query'
 
 export const Edit = () => {
 
@@ -32,7 +33,31 @@ export const Edit = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(newTitle);
+
+        if (saved) {
+            if (!newTitle || !newCatcher || !newDate || !newAuthor || !newText || !newImage || !newCategory) {
+                alert('Alle felter skal udfyldes')
+            } else {
+                console.log(newTitle);
+                console.log(newCatcher);
+                console.log(newDate);
+                console.log(newAuthor);
+                console.log(newText);
+                console.log(newImage);
+                console.log(newCategory);
+                const dataOject = {
+                    title: newTitle,
+                    catcher: newCatcher,
+                    date: newDate,
+                    author: newAuthor,
+                    content: newText,
+                    image: newImage,
+                    category: newCategory
+                }
+            }
+        } else {
+            alert('Teksten skal gemmes')
+        }
     }
 
     const [newTitle, setNewTitle] = useState()
@@ -44,13 +69,20 @@ export const Edit = () => {
     const [newImage, setNewImage] = useState()
     const [newCategory, setNewCategory] = useState()
 
+    const mutation = useMutation({
+        mutationFn: (event) => {
+            event.preventDefault()
+            return fetch('/api', { dataobject })
+        },
+    })
+
     return (
         <>
             <div className={style.editContainer}>
                 <div className={style.editContent}>
                     <h2>Rediger</h2>
                     <form onSubmit={(e) => handleSubmit(e)}>
-                        <label htmlFor="Title">Titel: "{data?.articles[0].title}"</label>
+                        <label initialValue htmlFor="Title">Titel: "{data?.articles[0].title}"</label>
                         <input placeholder='Ny titel' className={style.inputField} onChange={(e) => setNewTitle(e.target.value)} />
                         <label htmlFor="">Beskrivelse: "{data?.articles[0].catcher}"</label>
                         <input placeholder='Ny beskrivelse' className={style.inputField} onChange={(e) => setNewCatcher(e.target.value)} />
@@ -78,12 +110,14 @@ export const Edit = () => {
                                 content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
                             }}
                         />
-                        <button onChange={() => save()} className={style.inputSubmit}>Gem</button>
+                        <input type='button' onClick={() => save()} className={style.inputSubmit1} value='Gem tekst' />
                         <label htmlFor="">Billede</label>
-                        <input className={style.fileField} type='file'/>
+                        <input className={style.fileField} type='file' onChange={(e) => setNewImage(e.target.files)} />
+                        <input type="button" value={3142332} onClick={() => console.log(newImage)} />
+                        <img src={newImage ? URL.createObjectURL(newImage[0]) : ''} alt="" />
                         <label htmlFor="">Kategori: "{data?.articles[0].category}"</label>
                         <input placeholder='Ny kategori' className={style.inputField} onChange={(e) => setNewCategory(e.target.value)} />
-                        <input type="submit" value="Opdater artikel" className={style.inputSubmit} />
+                        <input type="submit" value="Opdater artikel" className={style.inputSubmit2} />
                     </form>
                 </div>
             </div>
