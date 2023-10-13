@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { Editor } from '@tinymce/tinymce-react';
 import { useRef } from 'react'
 import { useMutation } from '@tanstack/react-query'
+import { updateArticle } from '../../queries/updateArticle'
 
 export const Edit = () => {
 
@@ -31,6 +32,8 @@ export const Edit = () => {
         }
     };
 
+    let dataObject
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -38,14 +41,14 @@ export const Edit = () => {
             if (!newTitle || !newCatcher || !newDate || !newAuthor || !newText || !newImage || !newCategory) {
                 alert('Alle felter skal udfyldes')
             } else {
-                console.log(newTitle);
-                console.log(newCatcher);
-                console.log(newDate);
-                console.log(newAuthor);
-                console.log(newText);
-                console.log(newImage);
-                console.log(newCategory);
-                const dataOject = {
+                // console.log(newTitle);
+                // console.log(newCatcher);
+                // console.log(newDate);
+                // console.log(newAuthor);
+                // console.log(newText);
+                // console.log(newImage)
+                // console.log(newCategory)
+                dataObject = {
                     title: newTitle,
                     catcher: newCatcher,
                     date: newDate,
@@ -54,6 +57,7 @@ export const Edit = () => {
                     image: newImage,
                     category: newCategory
                 }
+                mutation.mutate()
             }
         } else {
             alert('Teksten skal gemmes')
@@ -68,13 +72,13 @@ export const Edit = () => {
     const [saved, setSaved] = useState(false)
     const [newImage, setNewImage] = useState()
     const [newCategory, setNewCategory] = useState()
+    const [imageId, setImageId] = useState()
 
     const mutation = useMutation({
-        mutationFn: (event) => {
-            event.preventDefault()
-            return fetch('/api', { dataobject })
-        },
+        mutationFn: async () => request(`https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clnij52rt05rg01ue9cvq8ycn/master`, updateArticle, { author: newAuthor, catcher: newCatcher, category: newCategory, date: newDate, title: newTitle, id: id })
     })
+
+    console.log(data);
 
     return (
         <>
@@ -82,12 +86,12 @@ export const Edit = () => {
                 <div className={style.editContent}>
                     <h2>Rediger</h2>
                     <form onSubmit={(e) => handleSubmit(e)}>
-                        <label initialValue htmlFor="Title">Titel: "{data?.articles[0].title}"</label>
+                        <label htmlFor="Title">Titel: "{data?.articles[0].title}"</label>
                         <input placeholder='Ny titel' className={style.inputField} onChange={(e) => setNewTitle(e.target.value)} />
                         <label htmlFor="">Beskrivelse: "{data?.articles[0].catcher}"</label>
                         <input placeholder='Ny beskrivelse' className={style.inputField} onChange={(e) => setNewCatcher(e.target.value)} />
                         <label htmlFor="">Dato: "{data?.articles[0].date.slice(8, 10)}/{data?.articles[0].date.slice(5, 7)}-{data?.articles[0].date.slice(0, 4)}" (dd/mm/yyyy)</label>
-                        <input placeholder='Ny dato' className={style.inputField} onChange={(e) => setNewDate(e.target.value)} />
+                        <input placeholder='Ny dato' type='date' className={style.inputField} onChange={(e) => setNewDate(e.target.value)} />
                         <label htmlFor="">Forfatter: "{data?.articles[0].author}"</label>
                         <input placeholder='Ny forfatter' className={style.inputField} onChange={(e) => setNewAuthor(e.target.value)} />
                         <label htmlFor="">Tekst</label>
@@ -112,9 +116,9 @@ export const Edit = () => {
                         />
                         <input type='button' onClick={() => save()} className={style.inputSubmit1} value='Gem tekst' />
                         <label htmlFor="">Billede</label>
-                        <input className={style.fileField} type='file' onChange={(e) => setNewImage(e.target.files)} />
+                        <input className={style.fileField} type='file' onChange={(e) => {setNewImage(URL.createObjectURL(e.target.files[0])), setImageId(data.articles[0].image.id)}} />
                         <input type="button" value={3142332} onClick={() => console.log(newImage)} />
-                        <img src={newImage ? URL.createObjectURL(newImage[0]) : ''} alt="" />
+                        <img src={newImage ? newImage : ''} alt="" />
                         <label htmlFor="">Kategori: "{data?.articles[0].category}"</label>
                         <input placeholder='Ny kategori' className={style.inputField} onChange={(e) => setNewCategory(e.target.value)} />
                         <input type="submit" value="Opdater artikel" className={style.inputSubmit2} />

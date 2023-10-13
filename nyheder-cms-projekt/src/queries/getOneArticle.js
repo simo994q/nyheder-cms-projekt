@@ -12,6 +12,7 @@ export const getOneArticle = `query MyQuery($artId: ID!) {
       }
       image {
         url
+        id
       }
     }
   }
