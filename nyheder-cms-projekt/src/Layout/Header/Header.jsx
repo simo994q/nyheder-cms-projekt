@@ -16,13 +16,13 @@ export const Header = () => {
         { title: 'Samfund', link: '/samfund' }
     ]
 
-    const [navigation, setNavigation] = useState('closed')
+    const [isOpen, setIsOpen] = useState(false)
 
     const openMenu = () => {
-        if (navigation == 'closed') {
-            setNavigation('open')
-        } else if (navigation == 'open') {
-            setNavigation('closed')
+        if (isOpen == false) {
+            setIsOpen(true)
+        } else if (isOpen == true) {
+            setIsOpen(false)
         }
     }
 
@@ -38,7 +38,7 @@ export const Header = () => {
                             )
                         })}
                     </ul>
-                    <ul className={`mobileList ${navigation}`}>
+                    <ul className={`mobileList ${isOpen ? 'open' : 'closed'}`}>
                         {links.map((item, index) => {
                             return (
                                 <li key={index}><NavLink to={`${item.link}`} onClick={() => openMenu()}>{item.title}</NavLink></li>
@@ -46,8 +46,8 @@ export const Header = () => {
                         })}
                     </ul>
                     <div>
-                        <NavLink to='/login'><img src="/user.svg" alt="" /></NavLink>
-                        <img className={style.menu} src="/menu.svg" alt="" onClick={() => openMenu()} />
+                        <NavLink to='/login'><img src="/user.svg" alt="" onClick={() => setIsOpen(false)} /></NavLink>
+                        <img className={style.menu} src={isOpen ? '/close.svg' : '/menu.svg'} alt="" onClick={() => openMenu()} />
                     </div>
                 </div>
             </div>
